@@ -48,20 +48,24 @@ export const Footer: React.FC = () => {
             <h4 className="text-[10px] text-accent uppercase tracking-[0.3em] font-bold">Connect</h4>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-text-base/40 hover:text-accent transition-colors cursor-pointer group">
-                <Instagram size={18} className="text-accent group-hover:scale-125 transition-transform" />
-                <span className="text-[10px] tracking-widest font-bold uppercase">Instagram</span>
+                <a href="https://www.instagram.com/haus___atelier/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                  <Instagram size={18} className="text-accent group-hover:scale-125 transition-transform" />
+                  <span className="text-[10px] tracking-widest font-bold uppercase">Instagram</span>
+                </a>
               </li>
               <li className="flex items-center gap-3 text-text-base/40 hover:text-accent transition-colors cursor-pointer group">
-                <MessageCircle size={18} className="text-green-500 group-hover:scale-125 transition-transform" />
-                <span className="text-[10px] tracking-widest font-bold uppercase">WhatsApp</span>
+                <a href="https://wa.me/918141021215" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                  <MessageCircle size={18} className="text-green-500 group-hover:scale-125 transition-transform" />
+                  <span className="text-[10px] tracking-widest font-bold uppercase">WhatsApp</span>
+                </a>
               </li>
               <li className="flex items-center gap-3 text-text-base/40 hover:text-accent transition-colors group">
                 <Phone size={18} className="text-accent group-hover:scale-125 transition-transform" />
-                <span className="text-[10px] tracking-widest font-bold uppercase">+91 [Phone]</span>
+                <span className="text-[10px] tracking-widest font-bold uppercase">+91 8141021215</span>
               </li>
               <li className="flex items-center gap-3 text-text-base/40 hover:text-accent transition-colors group">
                 <Mail size={18} className="text-accent group-hover:scale-125 transition-transform" />
-                <span className="text-[10px] tracking-widest font-bold uppercase">hello@hausatelier.in</span>
+                <span className="text-[10px] tracking-widest font-bold uppercase">info@hausatelier.in</span>
               </li>
             </ul>
           </div>
@@ -71,8 +75,8 @@ export const Footer: React.FC = () => {
           <p className="text-[10px] text-text-base/30 uppercase tracking-[0.2em]">
             © 2025 Haus Atelier. All rights reserved. Premium Interior Design Ahmedabad
           </p>
-          
-          <button 
+
+          <button
             onClick={scrollToTop}
             className="group flex items-center gap-4 text-[10px] text-text-base uppercase tracking-[0.3em] font-bold hover:text-accent transition-colors"
           >

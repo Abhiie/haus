@@ -14,7 +14,7 @@ export const Team: React.FC = () => {
     <section id="team" className="py-24 md:py-40 bg-surface">
       <div className="max-w-[1200px] mx-auto px-6 text-center">
         <div className="mb-20">
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -22,7 +22,7 @@ export const Team: React.FC = () => {
           >
             THE PEOPLE
           </motion.span>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -44,25 +44,24 @@ export const Team: React.FC = () => {
               className="group flex flex-col items-center"
             >
               <div className="relative w-full aspect-square bg-primary-bg rounded-full overflow-hidden mb-8 border border-border group-hover:border-accent group-hover:p-4 transition-all duration-500 shadow-2xl">
-                <div className="absolute inset-0 bg-black/20 z-10" />
-                <img 
-                  src={member.image} 
+                <img
+                  src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
-                
+
                 <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="w-12 h-[1px] bg-accent" />
                 </div>
               </div>
-              
+
               <h3 className="text-xl font-bold mb-1 text-text-base">{member.name}</h3>
               <p className="text-[10px] text-accent font-bold uppercase tracking-[0.2em] mb-4">{member.role}</p>
               <p className="text-text-base/40 text-sm font-light italic leading-snug px-4">
                 {member.bio}
               </p>
-              
+
               <div className="mt-6 w-0 h-[2px] bg-accent group-hover:w-8 transition-all duration-300" />
             </motion.div>
           ))}

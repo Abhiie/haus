@@ -20,7 +20,7 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 100);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -29,44 +29,44 @@ export const Navbar: React.FC = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-500",
-        isScrolled 
-          ? "bg-primary-bg/80 backdrop-blur-md py-4 shadow-xl border-b border-border/50" 
-          : "bg-transparent py-8"
+        "fixed top-0 left-0 w-full z-50 transition-all duration-700",
+        isScrolled
+          ? "bg-primary-bg/95 backdrop-blur-2xl py-6 border-b border-border translate-y-0 opacity-100"
+          : "-translate-y-full opacity-0 pointer-events-none py-10"
       )}
     >
-      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-10 flex items-center justify-between">
         <a href="#home" className="hover:opacity-80 transition-opacity">
           <Logo compact showText={true} />
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-12 bg-surface/50 backdrop-blur-md px-10 py-4 rounded-full border border-border">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-xs uppercase tracking-[0.2em] font-medium text-text-base/70 hover:text-accent transition-colors"
+              className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-base/60 hover:text-accent transition-all duration-300"
             >
               {link.name}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <ThemeToggle />
           <a
             href="#contact"
-            className="hidden sm:block px-6 py-3 bg-accent text-white text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-surface hover:text-accent border border-transparent hover:border-accent transition-all duration-300"
+            className="hidden sm:block px-8 py-4 bg-accent text-white text-[10px] uppercase tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20"
           >
-            Get a Free Consultation
+            Consult Now
           </a>
 
           <button
-            className="lg:hidden text-text-base"
+            className="lg:hidden text-text-base p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} strokeWidth={1} />}
           </button>
         </div>
       </div>

@@ -30,9 +30,9 @@ export const IntroLoader: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
-              <Logo showText={false} className="mb-8" />
+              <Logo showText={false} size="lg" className="mb-8" />
             </motion.div>
-            
+
             <div className="flex flex-wrap justify-center gap-x-2 overflow-hidden px-4">
               {words.map((word, i) => (
                 <motion.span
@@ -51,8 +51,8 @@ export const IntroLoader: React.FC = () => {
               ))}
             </div>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             className="absolute bottom-12 w-32 h-[1px] bg-accent"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}

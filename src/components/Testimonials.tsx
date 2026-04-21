@@ -56,7 +56,7 @@ const Column = ({ items, speed, reverse = false }: { items: typeof testimonials,
                 <img
                   src={t.avatar}
                   alt={t.name}
-                  className="w-full h-full object-cover grayscale brightness-95 group-hover:brightness-105 group-hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover transition-all duration-700"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=CC2626&color=fff&size=150`;

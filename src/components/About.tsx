@@ -15,7 +15,7 @@ const StatCounter = ({ end, label }: { end: string, label: string }) => {
       const stepTime = 10;
       const steps = duration / stepTime;
       const increment = numericEnd / steps;
-      
+
       const timer = setInterval(() => {
         start += increment;
         if (start >= numericEnd) {
@@ -25,7 +25,7 @@ const StatCounter = ({ end, label }: { end: string, label: string }) => {
           setCount(Math.floor(start));
         }
       }, stepTime);
-      
+
       return () => clearInterval(timer);
     }
   }, [isInView, numericEnd]);
@@ -43,76 +43,80 @@ const StatCounter = ({ end, label }: { end: string, label: string }) => {
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 md:py-40 bg-primary-bg overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+    <section id="about" className="py-24 md:py-48 bg-primary-bg overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-20 lg:gap-32 items-center">
           {/* Left Column - Image */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
-            className="flex-1 w-full relative group"
+            className="lg:col-span-6 w-full relative group"
           >
-            <div className="relative aspect-[4/5] bg-surface overflow-hidden border-l border-accent">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700" />
-              <div className="absolute inset-0 bg-black/20" />
-              
-              <div className="absolute inset-x-0 bottom-0 p-8 flex justify-center bg-gradient-to-t from-black/80 to-transparent">
-                <span className="font-serif italic text-white/60 text-sm tracking-widest">About Image — Studio / Team</span>
+            <div className="relative aspect-[4/5] rounded-[48px] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80"
+                alt="Our Studio"
+                className="absolute inset-0 w-full h-full object-cover scale-[1.01] grayscale hover:grayscale-0 transition-all duration-1000"
+              />
+
+              <div className="absolute top-8 right-8 w-24 h-24 rounded-full bg-accent/90 backdrop-blur-xl flex items-center justify-center border border-white/20 -rotate-12">
+                <span className="text-[10px] font-black text-white text-center leading-tight tracking-[0.2em]">10+ YEARS<br />OF DESIGN</span>
               </div>
             </div>
-            
-            {/* Geometric accent */}
-            <div className="absolute -top-12 -left-12 w-48 h-48 border border-white/5 -z-10 rounded-full" />
+
+            {/* Elegant detail label */}
+            <div className="mt-8 flex items-center gap-6">
+              <div className="w-12 h-[1px] bg-accent" />
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-text-base/40">Studio Interior Ahmedabad</span>
+            </div>
           </motion.div>
 
           {/* Right Column - Content */}
-          <div className="flex-1 space-y-8">
+          <div className="lg:col-span-6 space-y-12">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <span className="text-[11px] font-bold text-accent uppercase tracking-[0.3em]">WHO WE ARE</span>
-              <h2 className="mt-4 text-4xl md:text-5xl font-bold leading-tight">
-                Crafting Spaces With <br className="hidden md:block" /> Purpose & Precision
+              <span className="text-[11px] font-bold text-accent uppercase tracking-[0.6em] mb-6 block tracking-[0.5em]">THE STUDIO</span>
+              <h2 className="text-5xl md:text-7xl font-sans font-bold leading-[1.1] tracking-tighter">
+                Crafting Spaces <br />
+                <span className="font-serif italic font-light lowercase">With</span> Precision
               </h2>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="space-y-6 text-text-base/70 font-light leading-relaxed text-lg"
+              className="space-y-8 text-text-base/60 font-light leading-relaxed text-xl"
             >
               <p>
-                At our firm, we specialize in delivering complete turnkey interior solutions across Ahmedabad, Gujarat. With over 10 years of hands-on experience in the industry, we bring together thoughtful design, quality craftsmanship, and seamless execution to create spaces that truly reflect our clients' vision.
+                At Haus Atelier, we translate architectural visions into tangible realities. Based in Ahmedabad, we specialize in complete turnkey solutions that bridge the gap between abstract design and flawless execution.
               </p>
               <p>
-                From concept to completion, we manage every aspect of the project—design, planning, material selection, and execution—ensuring a smooth and hassle-free experience.
+                From massive residential estates to boutique commercial hubs, our team of dedicated designers and site engineers manage every nuance of the build process.
               </p>
-              <p>
-                Whether it's a residential home or a commercial space, we are committed to delivering projects on time, within budget, and with attention to every detail.
-              </p>
-              <p className="font-serif italic text-text-base text-xl">
-                "We don't just design interiors — we create spaces you'll enjoy living in."
-              </p>
-            </motion.div>
 
-            {/* Stats */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="pt-12 grid grid-cols-3 gap-8"
-            >
-              <StatCounter end="10+" label="Years Experience" />
-              <StatCounter end="200+" label="Projects Delivered" />
-              <StatCounter end="100%" label="Client Satisfaction" />
+              <div className="pt-8 border-t border-border mt-12 grid grid-cols-2 md:grid-cols-3 gap-12">
+                <StatCounter end="10+" label="EXPERIENCE" />
+                <StatCounter end="200+" label="PROJECTS" />
+                <StatCounter end="100%" label="SUCCESS" />
+              </div>
+
+              <div className="mt-12">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-4 text-xs uppercase tracking-[0.4em] font-black group"
+                >
+                  Work With Us
+                  <div className="w-12 h-[1px] bg-accent group-hover:w-20 transition-all duration-500" />
+                </a>
+              </div>
             </motion.div>
           </div>
         </div>

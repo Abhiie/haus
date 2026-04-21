@@ -14,7 +14,7 @@ export const Contact: React.FC = () => {
           {/* Left Column - Info */}
           <div className="flex-1 space-y-12">
             <div>
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -22,7 +22,7 @@ export const Contact: React.FC = () => {
               >
                 GET IN TOUCH
               </motion.span>
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
@@ -50,7 +50,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-[10px] text-text-base/30 uppercase tracking-[0.2em] font-bold mb-2">Phone Number</h4>
-                  <p className="text-xl font-medium leading-none text-text-base">+91 [Placeholder]</p>
+                  <p className="text-xl font-medium leading-none text-text-base">+91 8141021215</p>
                   <p className="text-sm text-text-base/40 mt-1 italic">Mon–Sat, 10am–7pm</p>
                 </div>
               </div>
@@ -61,31 +61,34 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-[10px] text-text-base/30 uppercase tracking-[0.2em] font-bold mb-2">Email Us</h4>
-                  <p className="text-xl font-medium text-text-base">hello@hausatelier.in</p>
+                  <p className="text-xl font-medium text-text-base">info@hausatelier.in</p>
                 </div>
               </div>
             </div>
 
             <div className="pt-8 flex gap-6">
               {[
-                { icon: <Instagram size={20} />, label: 'Instagram', color: 'bg-surface' },
-                { icon: <MessageCircle size={20} />, label: 'WhatsApp', color: 'bg-green-600/20 text-green-500' }
+                { icon: <Instagram size={20} />, label: 'Instagram', color: 'bg-surface', href: 'https://www.instagram.com/haus___atelier/' },
+                { icon: <MessageCircle size={20} />, label: 'WhatsApp', color: 'bg-green-600/20 text-green-500', href: 'https://wa.me/918141021215' }
               ].map((social, i) => (
-                <button 
+                <a
                   key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110",
                     social.color
                   )}
                 >
                   {social.icon}
-                </button>
+                </a>
               ))}
             </div>
           </div>
 
           {/* Right Column - Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -96,18 +99,18 @@ export const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-[10px] text-text-base/30 uppercase tracking-widest font-bold">Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="E.g. Rajesh Shah"
-                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium" 
+                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] text-text-base/30 uppercase tracking-widest font-bold">Phone Number</label>
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     placeholder="91-XXXXX-XXXXX"
-                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium" 
+                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium"
                   />
                 </div>
               </div>
@@ -115,18 +118,18 @@ export const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-[10px] text-text-base/30 uppercase tracking-widest font-bold">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     placeholder="rajesh@company.com"
-                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium" 
+                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] text-text-base/30 uppercase tracking-widest font-bold">City</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="Ahmedabad"
-                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium" 
+                    className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent transition-colors text-text-base font-medium"
                   />
                 </div>
               </div>
@@ -143,8 +146,8 @@ export const Contact: React.FC = () => {
 
               <div className="space-y-2">
                 <label className="text-[10px] text-text-base/30 uppercase tracking-widest font-bold">Brief About Your Project</label>
-                <textarea 
-                  rows={4} 
+                <textarea
+                  rows={4}
                   placeholder="Tell us about the space you're envisioning..."
                   className="w-full bg-transparent border-b border-border py-3 px-0 focus:outline-none focus:border-accent resize-none transition-colors text-text-base font-medium"
                 />

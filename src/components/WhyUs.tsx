@@ -18,55 +18,64 @@ const whyUsPoints = [
 
 export const WhyUs: React.FC = () => {
   return (
-    <section id="why-us" className="py-24 md:py-40 bg-primary-bg">
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="mb-20">
-          <motion.span 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-[11px] font-bold text-accent uppercase tracking-[0.4em]"
-          >
-            WHY HAUS ATELIER
-          </motion.span>
-          <motion.h2 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            viewport={{ once: true }}
-            className="mt-6 text-4xl md:text-5xl font-bold"
-          >
-            The Haus Atelier Difference
-          </motion.h2>
+    <section id="why-us" className="py-24 md:py-48 bg-primary-bg">
+      <div className="max-w-[1400px] mx-auto px-10">
+        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
+          <div>
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-[11px] font-black text-accent uppercase tracking-[0.6em] mb-6 block"
+            >
+              PHILOSOPHY
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-5xl md:text-7xl font-sans font-bold leading-[1.1] tracking-tighter"
+            >
+              The Haus Atelier <br />
+              Difference.
+            </motion.h2>
+          </div>
+          <div className="max-w-md">
+            <p className="text-xl text-text-base/40 font-light leading-relaxed">
+              We define our studio through precise engineering and a commitment to delivery excellence that few can match.
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col border-t border-border/50">
+        <div className="flex flex-col border-t border-border">
           {whyUsPoints.map((point, i) => (
             <motion.div
               key={point.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
+              transition={{ duration: 0.8, delay: i * 0.05 }}
               viewport={{ once: true }}
-              className="group flex flex-col md:flex-row items-start md:items-center py-8 border-b border-border/50 hover:bg-surface/30 transition-all duration-300 relative px-4"
+              className="group flex flex-col md:grid md:grid-cols-12 items-start md:items-center py-12 border-b border-border hover:bg-surface transition-all duration-700 relative px-8"
             >
-              <div className="absolute left-0 top-0 w-[2px] h-0 bg-accent group-hover:h-full transition-all duration-300" />
-              
-              <div className="font-serif italic text-4xl text-text-base/10 group-hover:text-text-base/30 transition-colors w-20">
+              <div className="col-span-1 font-serif italic text-4xl text-accent opacity-20 group-hover:opacity-100 transition-opacity">
                 {point.id}
               </div>
-              
-              <div className="flex-1 md:pr-12">
-                <h3 className="text-xl font-bold text-text-base group-hover:text-accent transition-colors">
+
+              <div className="col-span-5 md:pr-12 mt-4 md:mt-0">
+                <h3 className="text-2xl font-bold text-text-base group-hover:text-accent transition-colors duration-500 tracking-tight">
                   {point.title}
                 </h3>
               </div>
-              
-              <div className="flex-[1.5] mt-4 md:mt-0">
-                <p className="text-text-base/40 group-hover:text-text-base/70 transition-colors font-light leading-relaxed">
+
+              <div className="col-span-6 mt-4 md:mt-0">
+                <p className="text-text-base/40 group-hover:text-text-base/80 transition-colors duration-500 font-light leading-relaxed text-lg">
                   {point.desc}
                 </p>
               </div>
+
+              {/* Sophisticated hover indicator */}
+              <div className="absolute left-0 w-[4px] h-0 bg-accent group-hover:h-1/2 transition-all duration-500 top-1/4" />
             </motion.div>
           ))}
         </div>
