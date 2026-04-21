@@ -19,6 +19,11 @@ export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    (window as any).toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
+    return () => { delete (window as any).toggleMobileMenu; };
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
@@ -53,20 +58,21 @@ export const Navbar: React.FC = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-3 sm:gap-8">
           <ThemeToggle />
           <a
             href="#contact"
             className="hidden sm:block px-8 py-4 bg-accent text-white text-[10px] uppercase tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20"
           >
-            Consult Now
+            <span className="hidden min-[400px]:inline">Consult Now</span>
+            <span className="min-[400px]:hidden px-2">CTA</span>
           </a>
 
           <button
             className="lg:hidden text-text-base p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} strokeWidth={1} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} strokeWidth={1.5} />}
           </button>
         </div>
       </div>
@@ -109,6 +115,6 @@ export const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </header >
   );
 };

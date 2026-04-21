@@ -95,7 +95,7 @@ export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
       <IntroLoader isFinished={imagesPreloaded} />
       <Navbar />
 

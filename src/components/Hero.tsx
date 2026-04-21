@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const featuredProjects = [
@@ -91,17 +91,19 @@ export const Hero: React.FC = () => {
         animate={animationReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={t(0.3)}
         className={cn(
-          "relative z-10 grid grid-cols-12 border-b border-border/30 bg-primary-bg transition-colors duration-500",
+          "relative z-10 flex lg:grid lg:grid-cols-12 items-center justify-between border-b border-border/30 bg-primary-bg transition-colors duration-500",
           !animationReady && "hidden"
         )}
       >
-        <div className="col-span-3 flex items-center gap-3 px-6 lg:px-10 py-3 border-r border-border/30">
-          <img src="/assets/images/logo.webp" alt="Haus Atelier" className="h-14 w-auto object-contain" />
-          <span className="font-serif font-bold tracking-[0.1em] text-text-base text-lg hidden sm:block">HAUS ATELIER</span>
+        <div className="flex-shrink-0 lg:col-span-3 flex items-center gap-2 lg:gap-3 px-3 lg:px-10 py-3 border-r border-border/30">
+          <img src="/assets/images/logo.webp" alt="Haus Atelier" className="h-8 lg:h-14 w-auto object-contain" />
+          <span className="font-serif font-black tracking-[0.1em] lg:tracking-[0.15em] text-text-base text-[13px] sm:text-lg whitespace-nowrap">
+            HAUS ATELIER
+          </span>
         </div>
 
-        {/* Nav Links */}
-        <div className="col-span-6 hidden lg:flex items-center justify-center gap-10 px-6 py-7 border-r border-border/30">
+        {/* Nav Links - Desktop only */}
+        <div className="hidden lg:col-span-6 lg:flex items-center justify-center gap-10 px-6 py-7 border-r border-border/30">
           {['Home', 'About', 'Services', 'Why Us', 'Projects', 'Contact'].map((link, i) => (
             <motion.a
               key={link}
@@ -116,17 +118,30 @@ export const Hero: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="col-span-3 flex items-center justify-end px-6 lg:px-10 py-7">
+        {/* CTA & Mobile Menu */}
+        <div className="flex-shrink-0 lg:col-span-3 flex items-center justify-end gap-2 px-3 lg:px-10 py-3 lg:py-7">
           <motion.a
             href="#contact"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={animationReady ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={t(1.1)}
-            className="px-6 py-3.5 bg-accent text-white text-[10px] uppercase tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20"
+            className="px-3 lg:px-8 py-2.5 lg:py-4 bg-accent text-white text-[8px] lg:text-[10px] uppercase tracking-[0.2em] lg:tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20 whitespace-nowrap"
           >
-            Consult Now
+            <span className="hidden sm:inline">Consult Now</span>
+            <span className="sm:hidden px-1">CTA</span>
           </motion.a>
+
+          <button
+            className="lg:hidden text-text-base p-2 hover:text-accent transition-colors"
+            onClick={() => {
+              // Trigger the global navbar menu state if possible, 
+              // or handle it here. Since the global Navbar listens 
+              // for scroll, we can just use a global event or window state.
+              (window as any).toggleMobileMenu?.();
+            }}
+          >
+            <Menu size={24} strokeWidth={1.5} />
+          </button>
         </div>
       </motion.div>
 

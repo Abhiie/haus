@@ -48,7 +48,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ isChatOpen, on
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="fixed bottom-8 right-8 z-[60] flex flex-col items-center gap-3"
+          className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-[60] flex flex-col items-center gap-3"
         >
           {/* Scroll to top */}
           <AnimatePresence>

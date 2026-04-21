@@ -44,7 +44,7 @@ const StatCounter = ({ end, label }: { end: string, label: string }) => {
 export const About: React.FC = () => {
   return (
     <section id="about" className="py-24 md:py-48 bg-primary-bg overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-10">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-20 lg:gap-32 items-center">
           {/* Left Column - Image */}
           <motion.div
