@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -23,11 +23,34 @@ import { FloatingActions } from './components/FloatingActions';
 import { FAQ } from './components/FAQ';
 import { ChatBot } from './components/ChatBot';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { useImagePreloader } from './hooks/useImagePreloader';
+
+const CRITICAL_IMAGES = [
+  '/assets/images/logo.webp',
+  '/assets/images/projects/b201_bedroom.webp',
+  '/assets/images/projects/b201_living.webp',
+  '/assets/images/projects/kitchen.webp',
+  '/assets/images/projects/bedroom_v1.webp',
+  '/assets/images/projects/hero.webp',
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   useSmoothScroll();
+  const { imagesPreloaded } = useImagePreloader(CRITICAL_IMAGES);
+
+  // Robust Scroll-to-Top on initial load/refresh
+  useEffect(() => {
+    if (imagesPreloaded) {
+      // Delay slightly to match IntroLoader's exit or just trigger immediately
+      const timer = setTimeout(() => {
+        window.scrollTo(0, 0);
+        (window as any).lenis?.scrollTo(0, { immediate: true });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [imagesPreloaded]);
 
   useGSAP(() => {
     // Section fade-in reveals with parallax
@@ -52,49 +75,6 @@ export default function App() {
         onComplete: () => { (el as HTMLElement).style.overflow = 'visible'; },
       });
 
-      // Stagger child headings (h2, h3) within each section
-      gsap.from(`${section} h2, ${section} h3`, {
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-        },
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out",
-      });
-
-      // Stagger paragraphs
-      gsap.from(`${section} p`, {
-        scrollTrigger: {
-          trigger: section,
-          start: "top 70%",
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
-        delay: 0.3,
-      });
-    });
-
-    // Parallax effect on images inside sections
-    gsap.utils.toArray('section:not(#projects) img').forEach((img: any) => {
-      gsap.fromTo(img,
-        { y: 30 },
-        {
-          y: -30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        }
-      );
     });
 
     // Horizontal dividers reveal
@@ -112,9 +92,11 @@ export default function App() {
     });
   }, []);
 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   return (
     <div className="relative">
-      <IntroLoader />
+      <IntroLoader isFinished={imagesPreloaded} />
       <Navbar />
 
       <main>
@@ -146,8 +128,14 @@ export default function App() {
       </main>
 
       <Footer />
-      <FloatingActions />
-      <ChatBot />
+      <FloatingActions
+        isChatOpen={isChatOpen}
+        onToggleChat={() => setIsChatOpen(!isChatOpen)}
+      />
+      <ChatBot
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+      />
     </div>
   );
 }

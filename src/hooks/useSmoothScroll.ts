@@ -14,6 +14,17 @@ export const useSmoothScroll = () => {
       infinite: false,
     });
 
+    // Expose lenis to window for global access (e.g. from IntroLoader or FloatingActions)
+    (window as any).lenis = lenis;
+
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    // Initial resets
+    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -23,6 +34,7 @@ export const useSmoothScroll = () => {
 
     return () => {
       lenis.destroy();
+      delete (window as any).lenis;
     };
   }, []);
 };

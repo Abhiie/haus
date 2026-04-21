@@ -29,15 +29,15 @@ export const Navbar: React.FC = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-700",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-700 overflow-visible",
         isScrolled
-          ? "bg-primary-bg/95 backdrop-blur-2xl py-6 border-b border-border translate-y-0 opacity-100"
-          : "-translate-y-full opacity-0 pointer-events-none py-10"
+          ? "bg-primary-bg/95 backdrop-blur-2xl py-2 border-b border-border translate-y-0 opacity-100"
+          : "-translate-y-full opacity-0 pointer-events-none py-10 hidden"
       )}
     >
-      <div className="max-w-[1400px] mx-auto px-10 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-10 flex items-center justify-between">
         <a href="#home" className="hover:opacity-80 transition-opacity">
-          <Logo compact showText={true} />
+          <Logo compact />
         </a>
 
         {/* Desktop Nav */}

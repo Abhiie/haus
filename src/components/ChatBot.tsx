@@ -224,11 +224,20 @@ const TypingIndicator = ({ colors }: { colors: ReturnType<typeof getThemeColors>
 
 // ── Main Component ──
 
-export const ChatBot: React.FC = () => {
+export const ChatBot: React.FC<{ isOpen?: boolean; onClose?: () => void }> = ({
+    isOpen: externalIsOpen,
+    onClose: externalOnClose
+}) => {
     const theme = useTheme();
     const colors = getThemeColors(theme);
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [internalIsOpen, setInternalIsOpen] = useState(false);
+    const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+    const setIsOpen = (val: boolean) => {
+        if (externalOnClose && !val) externalOnClose();
+        setInternalIsOpen(val);
+    };
+
     const [isMaximized, setIsMaximized] = useState(false);
     const [loaderDone, setLoaderDone] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -296,8 +305,8 @@ export const ChatBot: React.FC = () => {
 
             const ai = new GoogleGenAI({ apiKey });
 
-            const response = await ai.s.generateContent({
-                model: 'gemini-2.0-flash',
+            const response = await ai.models.generateContent({
+                model: 'gemini-3-flash-preview',
                 contents: textToSend,
                 config: { systemInstruction: SYSTEM_CONTEXT },
             });
@@ -348,24 +357,7 @@ export const ChatBot: React.FC = () => {
 
     return createPortal(
         <>
-            {/* ── FAB ── */}
-            <AnimatePresence>
-                {!isOpen && loaderDone && (
-                    <motion.button
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0, opacity: 0 }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => setIsOpen(true)}
-                        className="fixed z-[9998] w-14 h-14 rounded-full bg-accent text-white flex items-center justify-center cursor-pointer"
-                        style={{ bottom: 172, right: 32, boxShadow: colors.fabShadow }}
-                    >
-                        <Sparkles size={22} />
-                        <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-20" />
-                    </motion.button>
-                )}
-            </AnimatePresence>
+            {/* FAB removed - handled by FloatingActions */}
 
             {/* ── Chat Window ── */}
             <AnimatePresence>

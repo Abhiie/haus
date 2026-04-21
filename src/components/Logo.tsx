@@ -8,34 +8,36 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Logo: React.FC<LogoProps> = ({ className, showText = true, compact = false, size }) => {
-  // Determine icon size — 'size' prop takes priority, else based on compact
-  const wrapperSize = size === 'lg' ? 'w-28 h-28'
-    : size === 'md' ? 'w-16 h-16'
+export const Logo: React.FC<LogoProps> = ({ className, compact = false, size }) => {
+  // For compact/navbar mode: show brand text only (logo image has black bg that clashes with white navbar)
+  if (compact) {
+    return (
+      <div className={cn('flex items-center gap-3', className)}>
+        <img
+          src="/assets/images/logo.webp"
+          alt="Haus Atelier"
+          className="h-10 w-auto object-contain"
+        />
+        <span className="font-serif font-black tracking-[0.15em] text-text-base text-sm sm:text-lg whitespace-nowrap">
+          HAUS ATELIER
+        </span>
+      </div>
+    );
+  }
+
+  // Full logo image with all text and emblem embedded
+  const imgSize = size === 'lg' ? 'w-72 h-72'
+    : size === 'md' ? 'w-36 h-36'
       : size === 'sm' ? 'w-10 h-10'
-        : compact ? 'w-10 h-10' : 'w-16 h-16';
+        : 'w-28 h-28';
 
   return (
-    <div className={cn("relative flex items-center gap-4", className)}>
-      {/* Circular clip wrapper ensures the logo is always a perfect circle */}
-      <div className={cn("rounded-full overflow-hidden flex-shrink-0", wrapperSize)}>
-        <img
-          src="/assets/images/logo.png"
-          alt="Haus Atelier Logo"
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {showText && !compact && (
-        <div className="flex flex-col">
-          <span className="font-serif text-2xl font-bold tracking-[0.1em] leading-tight text-text-base">HAUS ATELIER</span>
-          <span className="text-[10px] tracking-[0.3em] text-text-base/60 uppercase">Interior Studio</span>
-        </div>
-      )}
-
-      {showText && compact && (
-        <span className="font-serif text-lg font-bold tracking-[0.05em] text-text-base">HAUS ATELIER</span>
-      )}
+    <div className={cn('relative flex items-center', className)}>
+      <img
+        src="/assets/images/logo.webp"
+        alt="Haus Atelier Logo"
+        className={cn('object-contain flex-shrink-0', imgSize)}
+      />
     </div>
   );
 };

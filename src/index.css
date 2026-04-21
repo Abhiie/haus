@@ -13,6 +13,7 @@
 }
 
 :root {
+  background-color: #000000;
   --bg-primary: #0A0A0A;
   /* Deeper Black */
   --bg-surface: #121212;
@@ -36,7 +37,7 @@
 
 @layer base {
   body {
-    @apply bg-primary-bg text-text-base font-sans antialiased selection:bg-accent selection:text-white transition-all duration-500;
+    @apply bg-[#000000] text-text-base font-sans antialiased selection:bg-accent selection:text-white transition-all duration-500;
     overflow-x: hidden;
   }
 

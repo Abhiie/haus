@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const featuredProjects = [
   { name: 'Obsidian Suite', image: '/assets/images/projects/b201_bedroom.webp' },
   { name: 'Thalivad Residence', image: '/assets/images/projects/b201_living.webp' },
   { name: 'Aurora Residence', image: '/assets/images/projects/kitchen.webp' },
   { name: 'Ivory Residence', image: '/assets/images/projects/bedroom_v1.webp' },
+  { name: 'Celestial Loft', image: '/assets/images/projects/hero.webp' },
+  { name: 'Onyx Villa', image: '/assets/images/projects/b201_bedroom.webp' },
 ];
 
 // Animated text component — reveals characters one by one
@@ -48,6 +51,7 @@ const GridLine = ({ orientation, position, delay, startAnimation }: { orientatio
 
 export const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const cardsRef = useRef<HTMLDivElement>(null);
   // Wait for IntroLoader to finish (3.5s visible + 1.2s exit = ~4.7s)
   const [animationReady, setAnimationReady] = useState(false);
 
@@ -57,8 +61,13 @@ export const Hero: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % featuredProjects.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length);
+  const scrollCards = (direction: 'left' | 'right') => {
+    if (!cardsRef.current) return;
+    const scrollAmount = 280;
+    cardsRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+  };
+  const nextSlide = () => scrollCards('right');
+  const prevSlide = () => scrollCards('left');
 
   // Shorthand to only animate after loader is done
   const a = (props: any, delay: number = 0) => animationReady ? { ...props } : {};
@@ -81,34 +90,26 @@ export const Hero: React.FC = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={animationReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={t(0.3)}
-        className="relative z-10 grid grid-cols-12 border-b border-border/30"
+        className={cn(
+          "relative z-10 grid grid-cols-12 border-b border-border/30 bg-primary-bg transition-colors duration-500",
+          !animationReady && "hidden"
+        )}
       >
-        {/* Logo */}
-        <div className="col-span-3 flex items-center px-6 lg:px-10 py-5 border-r border-border/30">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={animationReady ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={t(0.5)}
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                <img src="/assets/images/logo.png" alt="Haus Atelier" className="w-full h-full object-cover" />
-              </div>
-              <span className="text-sm font-bold tracking-[0.15em] text-text-base hidden sm:block">HAUS ATELIER</span>
-            </div>
-          </motion.div>
+        <div className="col-span-3 flex items-center gap-3 px-6 lg:px-10 py-3 border-r border-border/30">
+          <img src="/assets/images/logo.webp" alt="Haus Atelier" className="h-14 w-auto object-contain" />
+          <span className="font-serif font-bold tracking-[0.1em] text-text-base text-lg hidden sm:block">HAUS ATELIER</span>
         </div>
 
         {/* Nav Links */}
-        <div className="col-span-5 hidden lg:flex items-center justify-center gap-14 px-10 py-7 border-r border-border/30">
-          {['About', 'Services', 'Projects', 'Contact'].map((link, i) => (
+        <div className="col-span-6 hidden lg:flex items-center justify-center gap-10 px-6 py-7 border-r border-border/30">
+          {['Home', 'About', 'Services', 'Why Us', 'Projects', 'Contact'].map((link, i) => (
             <motion.a
               key={link}
-              href={`#${link.toLowerCase()}`}
+              href={`#${link.toLowerCase().replace(' ', '-')}`}
               initial={{ opacity: 0, y: -10 }}
               animate={animationReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
               transition={t(0.7 + i * 0.1)}
-              className="text-[11px] uppercase tracking-[0.3em] text-text-base/40 hover:text-text-base transition-colors duration-300 font-medium"
+              className="text-[10px] uppercase tracking-[0.3em] text-text-base/40 hover:text-text-base transition-colors duration-300 font-bold"
             >
               {link}
             </motion.a>
@@ -116,21 +117,21 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* CTA */}
-        <div className="col-span-4 flex items-center justify-end px-6 lg:px-10 py-7">
+        <div className="col-span-3 flex items-center justify-end px-6 lg:px-10 py-7">
           <motion.a
             href="#contact"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={animationReady ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={t(1.1)}
-            className="px-7 py-3.5 border border-border rounded-full text-[10px] uppercase tracking-[0.3em] text-text-base font-bold hover:bg-accent hover:text-white hover:border-accent transition-all duration-500"
+            className="px-6 py-3.5 bg-accent text-white text-[10px] uppercase tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20"
           >
-            Request a Call Back
+            Consult Now
           </motion.a>
         </div>
       </motion.div>
 
       {/* === HERO CONTENT AREA === */}
-      <div className="relative z-10 grid grid-cols-12 min-h-[65vh]">
+      <div className="relative z-10 grid grid-cols-12 min-h-[45vh]">
         {/* LEFT: Tagline */}
         <div className="col-span-12 lg:col-span-3 flex flex-col justify-between px-6 lg:px-10 py-12 border-r border-border/30">
           <motion.p
@@ -232,7 +233,7 @@ export const Hero: React.FC = () => {
       <div className="relative z-10 border-t border-border/30 bg-primary-bg transition-colors duration-500">
         <div className="grid grid-cols-12 items-stretch">
           {/* Project cards */}
-          <div className="col-span-12 lg:col-span-9 flex gap-5 px-6 lg:px-10 py-8 overflow-x-auto scrollbar-hide">
+          <div ref={cardsRef} className="col-span-12 lg:col-span-9 flex gap-5 px-6 lg:px-10 py-6 overflow-x-auto scrollbar-hide">
             {featuredProjects.map((project, i) => (
               <motion.div
                 key={i}
@@ -247,7 +248,7 @@ export const Hero: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 whileHover={{ y: -8 }}
-                className="flex-shrink-0 w-[260px] h-[180px] rounded-[20px] overflow-hidden relative group cursor-pointer"
+                className="flex-shrink-0 w-[220px] h-[140px] rounded-[20px] overflow-hidden relative group cursor-pointer"
               >
                 <img
                   src={project.image}
@@ -304,14 +305,14 @@ export const Hero: React.FC = () => {
         <div className="flex whitespace-nowrap animate-marquee">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex items-center mx-16">
-              <span className="text-[11px] uppercase tracking-[0.5em] font-bold text-text-base/[0.08]">Residential Design</span>
-              <div className="mx-10 w-1.5 h-1.5 border border-accent/30 rotate-45" />
-              <span className="text-[11px] uppercase tracking-[0.5em] font-bold text-text-base/[0.08]">Turnkey Execution</span>
-              <div className="mx-10 w-1.5 h-1.5 border border-accent/30 rotate-45" />
-              <span className="text-[11px] uppercase tracking-[0.5em] font-bold text-text-base/[0.08]">Commercial Spaces</span>
-              <div className="mx-10 w-1.5 h-1.5 border border-accent/30 rotate-45" />
-              <span className="text-[11px] uppercase tracking-[0.5em] font-bold text-text-base/[0.08]">Bespoke Furniture</span>
-              <div className="mx-10 w-1.5 h-1.5 border border-accent/30 rotate-45" />
+              <span className="text-[14px] uppercase tracking-[0.5em] font-bold text-text-base/70">Residential Design</span>
+              <div className="mx-10 w-2 h-2 border border-accent/80 rotate-45" />
+              <span className="text-[14px] uppercase tracking-[0.5em] font-bold text-text-base/70">Turnkey Execution</span>
+              <div className="mx-10 w-2 h-2 border border-accent/80 rotate-45" />
+              <span className="text-[14px] uppercase tracking-[0.5em] font-bold text-text-base/70">Commercial Spaces</span>
+              <div className="mx-10 w-2 h-2 border border-accent/80 rotate-45" />
+              <span className="text-[14px] uppercase tracking-[0.5em] font-bold text-text-base/70">Bespoke Furniture</span>
+              <div className="mx-10 w-2 h-2 border border-accent/80 rotate-45" />
             </div>
           ))}
         </div>
