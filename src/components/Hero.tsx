@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, Menu } from 'lucide-react';
+import { Logo } from './Logo';
 import { cn } from '@/lib/utils';
 
 const featuredProjects = [
@@ -57,7 +58,10 @@ export const Hero: React.FC = () => {
 
   useEffect(() => {
     // IntroLoader: 3500ms timeout + 1200ms exit animation = 4700ms total
-    const timer = setTimeout(() => setAnimationReady(true), 4800);
+    const timer = setTimeout(() => {
+      setAnimationReady(true);
+      window.dispatchEvent(new CustomEvent('hero-loaded'));
+    }, 2300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -95,11 +99,8 @@ export const Hero: React.FC = () => {
           !animationReady && "hidden"
         )}
       >
-        <div className="flex-shrink-0 lg:col-span-3 flex items-center gap-2 lg:gap-3 px-3 lg:px-10 py-3 border-r border-border/30">
-          <img src="/assets/images/logo.webp" alt="Haus Atelier" className="h-8 lg:h-14 w-auto object-contain" />
-          <span className="font-serif font-black tracking-[0.1em] lg:tracking-[0.15em] text-text-base text-[13px] sm:text-lg whitespace-nowrap">
-            HAUS ATELIER
-          </span>
+        <div className="flex-shrink-0 lg:col-span-3 flex items-center gap-2 lg:gap-3 px-3 lg:px-10 py-4 border-r border-border/30">
+          <Logo compact className="h-12 lg:h-24 w-auto" />
         </div>
 
         {/* Nav Links - Desktop only */}

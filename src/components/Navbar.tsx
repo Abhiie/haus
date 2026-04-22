@@ -32,50 +32,52 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-700 overflow-visible",
-        isScrolled
-          ? "bg-primary-bg/95 backdrop-blur-2xl py-2 border-b border-border translate-y-0 opacity-100"
-          : "-translate-y-full opacity-0 pointer-events-none py-10 hidden"
-      )}
-    >
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-10 flex items-center justify-between">
-        <a href="#home" className="hover:opacity-80 transition-opacity">
-          <Logo compact />
-        </a>
-
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-12 bg-surface/50 backdrop-blur-md px-10 py-4 rounded-full border border-border">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-base/60 hover:text-accent transition-all duration-300"
-            >
-              {link.name}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3 sm:gap-8">
-          <ThemeToggle />
-          <a
-            href="#contact"
-            className="hidden sm:block px-8 py-4 bg-accent text-white text-[10px] uppercase tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20"
-          >
-            <span className="hidden min-[400px]:inline">Consult Now</span>
-            <span className="min-[400px]:hidden px-2">CTA</span>
+    <>
+      <header
+        className={cn(
+          "fixed top-0 left-0 w-full z-50 transition-all duration-700 overflow-visible",
+          (isScrolled || isMobileMenuOpen)
+            ? "bg-primary-bg/95 backdrop-blur-2xl py-2 border-b border-border translate-y-0 opacity-100 pointer-events-auto"
+            : "-translate-y-full opacity-0 pointer-events-none py-10 hidden"
+        )}
+      >
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-10 flex items-center justify-between">
+          <a href="#home" className="hover:opacity-80 transition-opacity mr-4 lg:mr-12">
+            <Logo compact />
           </a>
 
-          <button
-            className="lg:hidden text-text-base p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} strokeWidth={1.5} />}
-          </button>
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-12 bg-surface/50 backdrop-blur-md px-10 py-4 rounded-full border border-border">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-base/60 hover:text-accent transition-all duration-300"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3 sm:gap-8">
+            <ThemeToggle />
+            <a
+              href="#contact"
+              className="hidden sm:block px-8 py-4 bg-accent text-white text-[10px] uppercase tracking-[0.4em] font-black rounded-full hover:bg-white hover:text-accent transition-all duration-500 shadow-lg shadow-accent/20"
+            >
+              <span className="hidden min-[400px]:inline">Consult Now</span>
+              <span className="min-[400px]:hidden px-2">CTA</span>
+            </a>
+
+            <button
+              className="lg:hidden text-text-base p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} strokeWidth={1.5} />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -85,9 +87,9 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-primary-bg flex flex-col items-center justify-center lg:hidden"
+            className="fixed inset-0 z-40 bg-primary-bg flex flex-col items-center justify-start pt-24 pb-12 overflow-y-auto pointer-events-auto lg:hidden"
           >
-            <div className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-6 min-h-max w-full px-4">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.name}
@@ -107,7 +109,7 @@ export const Navbar: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-4 px-8 py-4 bg-accent text-white text-xs uppercase tracking-widest font-bold"
+                className="mt-4 px-8 py-4 bg-accent text-white text-xs uppercase tracking-widest font-bold text-center"
               >
                 Get a Free Consultation
               </motion.a>
@@ -115,6 +117,6 @@ export const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header >
+    </>
   );
 };

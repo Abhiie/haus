@@ -40,7 +40,7 @@ export const IntroLoader: React.FC<IntroLoaderProps> = ({ isFinished = false }) 
             className="absolute bottom-12 w-32 h-[1px] bg-accent"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
           />
         </motion.div>
       )}

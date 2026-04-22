@@ -22,11 +22,13 @@ import { Footer } from './components/Footer';
 import { FloatingActions } from './components/FloatingActions';
 import { FAQ } from './components/FAQ';
 import { ChatBot } from './components/ChatBot';
+import { ContactPopup } from './components/ContactPopup';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { useImagePreloader } from './hooks/useImagePreloader';
+import { Packages } from './components/Packages';
 
 const CRITICAL_IMAGES = [
-  '/assets/images/logo.webp',
+  '/assets/images/haus-logo-final.jpg',
   '/assets/images/projects/b201_bedroom.webp',
   '/assets/images/projects/b201_living.webp',
   '/assets/images/projects/kitchen.webp',
@@ -54,7 +56,7 @@ export default function App() {
 
   useGSAP(() => {
     // Section fade-in reveals with parallax
-    const sections = ['#about', '#services', '#why-us', '#projects', '#testimonials', '#team', '#faq', '#contact'];
+    const sections = ['#about', '#services', '#why-us', '#projects', '#testimonials', '#faq', '#contact'];
 
     sections.forEach((section) => {
       const el = document.querySelector(section);
@@ -103,10 +105,15 @@ export default function App() {
         <Hero />
 
         <div className="divider h-[1px] w-full bg-accent/20" />
+        <Packages />
+
+        <div className="divider h-[1px] w-full bg-accent/20" />
         <About />
 
         <div className="divider h-[1px] w-full bg-accent/20" />
         <Services />
+
+        <div className="divider h-[1px] w-full bg-accent/20" />
 
         <div className="divider h-[1px] w-full bg-accent/20" />
         <WhyUs />
@@ -116,9 +123,6 @@ export default function App() {
 
         <div className="divider h-[1px] w-full bg-accent/20" />
         <Testimonials />
-
-        <div className="divider h-[1px] w-full bg-accent/20" />
-        <Team />
 
         <div className="divider h-[1px] w-full bg-accent/20" />
         <FAQ />
@@ -136,6 +140,7 @@ export default function App() {
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
       />
+      <ContactPopup />
     </div>
   );
 }
