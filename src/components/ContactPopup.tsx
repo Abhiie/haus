@@ -41,28 +41,30 @@ export const ContactPopup: React.FC = () => {
                 className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-500 ease-out data-[closed]:opacity-0"
             />
 
-            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 z-[101]">
-                <DialogPanel
-                    transition
-                    className="relative w-full max-w-[650px] max-h-[90dvh] bg-surface p-6 md:p-14 border border-border shadow-2xl flex flex-col transition duration-500 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
-                >
-                    <button
-                        onClick={() => setIsOpen(false)}
-                        className="sticky lg:absolute top-0 lg:top-6 right-0 lg:right-6 shrink-0 ml-auto bg-surface w-fit text-text-base/40 hover:text-accent transition-colors z-20"
+            <div data-lenis-prevent className="fixed inset-0 z-[101] overflow-y-auto scrollbar-hide overscroll-none">
+                <div className="flex min-h-full items-center justify-center p-4 py-10 md:p-8">
+                    <DialogPanel
+                        transition
+                        className="relative w-full max-w-[650px] bg-surface border border-border shadow-2xl transition duration-500 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
                     >
-                        <X size={32} strokeWidth={1} />
-                    </button>
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="absolute top-4 right-4 md:top-6 md:right-6 text-text-base/40 hover:text-accent transition-colors z-20 bg-surface rounded-full p-1"
+                        >
+                            <X size={32} strokeWidth={1} />
+                        </button>
 
-                    <div className="flex-1 overflow-y-auto scrollbar-hide relative z-10 w-full mt-[-32px] pt-8 lg:mt-0 lg:pt-0">
-                        <div className="mb-6 lg:mb-8">
-                            <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em]">CONSULTATION</span>
-                            <h2 className="mt-4 text-2xl md:text-3xl font-bold leading-tight">Start Your Design Journey</h2>
-                            <p className="mt-2 text-sm text-text-base/50">Fill in the details below and we'll get back to you shortly.</p>
+                        <div className="p-6 md:p-14 w-full">
+                            <div className="mb-6 md:mb-8 pr-10">
+                                <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em]">CONSULTATION</span>
+                                <h2 className="mt-2 md:mt-4 text-2xl md:text-3xl font-bold leading-tight">Start Your Design Journey</h2>
+                                <p className="mt-1 md:mt-2 text-sm text-text-base/50">Fill in the details below and we'll get back to you shortly.</p>
+                            </div>
+
+                            <ContactForm compact />
                         </div>
-
-                        <ContactForm compact />
-                    </div>
-                </DialogPanel>
+                    </DialogPanel>
+                </div>
             </div>
         </Dialog>
     );
