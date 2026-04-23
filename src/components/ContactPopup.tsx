@@ -42,10 +42,10 @@ export const ContactPopup: React.FC = () => {
             />
 
             <div data-lenis-prevent className="fixed inset-0 z-[101] overflow-y-auto scrollbar-hide overscroll-none">
-                <div className="flex min-h-full items-center justify-center p-4 py-10 md:p-8">
+                <div className="flex min-h-[100dvh] items-start justify-center p-4 pt-12 md:items-center py-10 md:p-8">
                     <DialogPanel
                         transition
-                        className="relative w-full max-w-[650px] bg-surface border border-border shadow-2xl transition duration-500 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+                        className="relative w-full max-w-[650px] bg-surface border border-border shadow-2xl transition duration-500 ease-out data-[closed]:scale-95 data-[closed]:opacity-0 my-auto"
                     >
                         <button
                             onClick={() => setIsOpen(false)}
