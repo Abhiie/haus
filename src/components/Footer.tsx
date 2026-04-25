@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-[10px] text-accent uppercase tracking-[0.3em] font-bold">Connect</h4>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-text-base/40 hover:text-accent transition-colors cursor-pointer group">
-                <a href="https://www.instagram.com/haus___atelier/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                <a href="https://www.instagram.com/drmargi29?igsh=MW5sZW8yMzVjdnYyaQ==" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
                   <Instagram size={18} className="text-accent group-hover:scale-125 transition-transform" />
                   <span className="text-[10px] tracking-widest font-bold uppercase">Instagram</span>
                 </a>

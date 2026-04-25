@@ -88,7 +88,7 @@ export const Contact: React.FC = () => {
 
             <div className="pt-8 flex gap-6">
               {[
-                { icon: <Instagram size={20} />, label: 'Instagram', color: 'bg-surface text-text-base', href: 'https://www.instagram.com/haus___atelier/' },
+                { icon: <Instagram size={20} />, label: 'Instagram', color: 'bg-surface text-text-base', href: 'https://www.instagram.com/drmargi29?igsh=MW5sZW8yMzVjdnYyaQ==' },
                 { icon: <WhatsAppIcon size={20} />, label: 'WhatsApp', color: 'bg-green-600/20 text-[#25D366]', href: 'https://wa.me/918141021215' }
               ].map((social, i) => (
                 <a

@@ -90,7 +90,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = () => {
 
                 {/* Instagram */}
                 <motion.a
-                  href="https://www.instagram.com/haus___atelier/"
+                  href="https://www.instagram.com/drmargi29?igsh=MW5sZW8yMzVjdnYyaQ=="
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0, y: 20 }}
