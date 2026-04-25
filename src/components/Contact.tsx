@@ -128,6 +128,7 @@ export const Contact: React.FC = () => {
           className="mt-20 w-full h-[350px] md:h-[450px] rounded-2xl md:rounded-3xl overflow-hidden border border-border grayscale hover:grayscale-0 transition-all duration-700"
         >
           <iframe
+            title="Haus Atelier Ahmedabad Location Map"
             src="https://maps.google.com/maps?q=Swarnim+Dharti,+behind+Sardardham,+near+Vaishnodevi+circle,+Ahmedabad,+Gujarat+382421&t=&z=14&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
