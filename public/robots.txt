@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://haus-jet.vercel.app/sitemap.xml
+Sitemap: https://www.hausatelier.in/sitemap.xml
