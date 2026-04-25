@@ -10,11 +10,9 @@ const WhatsAppIcon = () => (
 );
 
 interface FloatingActionsProps {
-  isChatOpen: boolean;
-  onToggleChat: () => void;
 }
 
-export const FloatingActions: React.FC<FloatingActionsProps> = ({ isChatOpen, onToggleChat }) => {
+export const FloatingActions: React.FC<FloatingActionsProps> = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [loaderDone, setLoaderDone] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -109,7 +107,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ isChatOpen, on
             )}
           </AnimatePresence>
 
-          {/* (+) Toggle Button - Stays on TOP of the Chat button as per user's expected sequence */}
+          {/* (+) Toggle Button - Stays on TOP */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
             whileHover={{ scale: 1.1 }}
@@ -122,20 +120,6 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ isChatOpen, on
             >
               <Plus size={26} />
             </motion.div>
-          </motion.button>
-
-          {/* Robot button (Chat) - Stays at the bottom as per user's expected sequence */}
-          <motion.button
-            onClick={onToggleChat}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            animate={isChatOpen ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
-            className="w-14 h-14 flex items-center justify-center rounded-full bg-accent text-white shadow-lg relative"
-          >
-            <Bot size={26} />
-            {!isChatOpen && (
-              <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-20" />
-            )}
           </motion.button>
         </motion.div>
       )}

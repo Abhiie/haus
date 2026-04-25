@@ -13,22 +13,19 @@ const packages = [
         id: '2bhk',
         type: '2BHK',
         price: 'Starting at 10L*',
-        image: '/assets/images/projects/b201_living.webp', // using a known image for fallback
-        realImage: '/assets/images/package_2bhk.webp',
+        image: '/assets/images/projects/living_1.webp',
     },
     {
         id: '3bhk',
         type: '3BHK',
         price: 'Starting at 12L*',
-        image: '/assets/images/projects/b201_bedroom.webp',
-        realImage: '/assets/images/package_3bhk.webp',
+        image: '/assets/images/projects/kaushalbhai_bedroom.webp',
     },
     {
         id: '4bhk',
         type: '4BHK',
         price: 'Starting at 14L*',
-        image: '/assets/images/projects/kitchen.webp',
-        realImage: '/assets/images/package_4bhk.webp',
+        image: '/assets/images/projects/whatsapp_image_2026_04_13_at_7_52_11_pm_2.webp',
     }
 ];
 
@@ -77,10 +74,7 @@ export const Packages: React.FC = () => {
                                 <div className="group relative w-full aspect-[3/4] sm:aspect-[4/5] md:h-[450px] rounded-xl md:rounded-2xl overflow-hidden cursor-pointer">
                                     {/* Background Image Setup */}
                                     <img
-                                        src={pkg.realImage}
-                                        onError={(e) => {
-                                            (e.target as HTMLImageElement).src = pkg.image; // fallback if image missing
-                                        }}
+                                        src={pkg.image}
                                         alt={pkg.type}
                                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
@@ -114,12 +108,6 @@ export const Packages: React.FC = () => {
                             <ChevronRight size={24} />
                         </button>
                     </div>
-                </div>
-
-                <div className="mt-8 text-center md:text-left">
-                    <p className="text-sm text-text-base/50 italic">
-                        *The prices include only modular interiors for new homes.
-                    </p>
                 </div>
             </div>
         </section>

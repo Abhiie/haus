@@ -56,8 +56,8 @@ export const About: React.FC = () => {
           >
             <div className="relative aspect-[4/5] rounded-[48px] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80"
-                alt="Our Studio"
+                src="/assets/images/projects/b201_living.webp"
+                alt="Our Studio - Haus Atelier Project"
                 className="absolute inset-0 w-full h-full object-cover scale-[1.01] grayscale hover:grayscale-0 transition-all duration-1000"
               />
 

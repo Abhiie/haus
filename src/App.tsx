@@ -21,7 +21,6 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { FloatingActions } from './components/FloatingActions';
 import { FAQ } from './components/FAQ';
-import { ChatBot } from './components/ChatBot';
 import { ContactPopup } from './components/ContactPopup';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { useImagePreloader } from './hooks/useImagePreloader';
@@ -49,6 +48,7 @@ export default function App() {
       const timer = setTimeout(() => {
         window.scrollTo(0, 0);
         (window as any).lenis?.scrollTo(0, { immediate: true });
+        ScrollTrigger.refresh();
       }, 100);
       return () => clearTimeout(timer);
     }
@@ -94,7 +94,6 @@ export default function App() {
     });
   }, []);
 
-  const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
     <div className="relative overflow-x-hidden">
@@ -132,14 +131,7 @@ export default function App() {
       </main>
 
       <Footer />
-      <FloatingActions
-        isChatOpen={isChatOpen}
-        onToggleChat={() => setIsChatOpen(!isChatOpen)}
-      />
-      <ChatBot
-        isOpen={isChatOpen}
-        onClose={() => setIsChatOpen(false)}
-      />
+      <FloatingActions />
       <ContactPopup />
     </div>
   );

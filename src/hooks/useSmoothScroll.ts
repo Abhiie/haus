@@ -25,6 +25,12 @@ export const useSmoothScroll = () => {
     window.scrollTo(0, 0);
     lenis.scrollTo(0, { immediate: true });
 
+    // Force another reset after a tiny delay to catch any late browser restoration
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      lenis.scrollTo(0, { immediate: true });
+    }, 10);
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
