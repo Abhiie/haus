@@ -63,6 +63,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           <tr><td style="padding: 10px 0; border-bottom: 1px solid #f9f9f9;"><strong>Phone:</strong></td><td>${cleanPhone}</td></tr>
           <tr><td style="padding: 10px 0; border-bottom: 1px solid #f9f9f9;"><strong>City:</strong></td><td>${sanitize(city)}</td></tr>
           <tr><td style="padding: 10px 0; border-bottom: 1px solid #f9f9f9;"><strong>Project:</strong></td><td>${sanitize(projectType)}</td></tr>
+          <tr><td style="padding: 10px 0; border-bottom: 1px solid #f9f9f9;"><strong>BHK:</strong></td><td>${sanitize(bhkPlanning)}</td></tr>
+          <tr><td style="padding: 10px 0; border-bottom: 1px solid #f9f9f9;"><strong>Location:</strong></td><td>${sanitize(siteLocation)}</td></tr>
         </table>
         <p><strong>Message:</strong></p>
         <div style="background: #fdfdfd; padding: 15px; border-left: 4px solid #000; background: #fafafa;">
